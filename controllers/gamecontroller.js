@@ -1,12 +1,14 @@
+const sequelize = require('../db');
 var router = require('express').Router();
-var Game = require('../db').import('../models/game');
+var Game = sequelize.import("../models/game")
+
 
 router.get('/all', (req, res) => {
     Game.findAll({ where: { owner_id: req.user.id } })
         .then(
             function findSuccess(data) {
                 res.status(200).json({
-                    games: games,
+                    games: data,
                     message: "Data fetched."
                 })
             },
@@ -70,7 +72,7 @@ router.put('/update/:id', (req, res) => {
         {
             where: {
                 id: req.params.id,
-                owner_id: req.user
+                owner_id: req.user.id
             }
         })
         .then(
@@ -113,4 +115,4 @@ router.delete('/remove/:id', (req, res) => {
     )
 })
 
-module.exports = routers;
+module.exports = router;
