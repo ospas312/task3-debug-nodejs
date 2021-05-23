@@ -52,3 +52,58 @@ var User = require('sequelize').import('../models/user');//var User = require('.
 14    в gamecontroller   games: games  //    games: data,
 
 15   router.put('/update/:id', (req, res) => {   не был указан id           owner_id: req.user.id
+
+16 router.post('/create', (req, res) => {
+    Game.create({
+        title: req.body.game.title,
+        owner_id: req.body.user.id,  надо req.user.id
+можно в body передавать айди любого юзера и оно создаст игру для любого юзера --- логич
+
+
+3 пункт 
+Найденные ошибки компиляции:
+
+<не правильно импортирован Router>.<импортирован Router>.Исправлена(ы) строка(и) <1> в файле <./controllers/usercontroller.js>
+
+<ошибка в названии импортированой зависимости  bcrypt>.<исправлена на bcryptjs>.Исправлена(ы) строка(и) <2> в файле <./controllers/usercontroller.js>
+
+<в db отсутствует экспорт sequelize>.<добавил экспорт sequelize>. Исправлена(ы) строка(и) <19>
+в файле <./db.js>
+
+<неправильный импорт модели User из db>.<исправлен импорт модели User>.Исправлена(ы) строка(и) <5-6> в файле <./controllers/usercontroller.js>
+
+<неправильный импорт модели Game из db>.<исправлен импорт модели User>.Исправлена(ы) строка(и) <2-3> в файле <./controllers/gamecontroller.js>
+
+<нет экспорта модели game>.<добавлен module.exports к функции>.Исправлена(ы) строка(и) <1>в файле <./models/game.js>
+
+<ошибка в названии эекспорта routers>.<исправлен на router>.Исправлена(ы) строка(и) <116> в файле <./controllers/gamecontroller.js>
+
+<неправильный импорт модели User из db>.<Испроавлен импорт модели User>.Исправлена(ы) строка(и) <2-3>в файле <./middleware/validate-session.js>
+
+<не указан порт в app.listen>.<указал порт 4000>.Исправлена(ы) строка(и) <13>в файле <./app.js>
+
+не уверен ошибка нет <не подключаеться к базе из за версии модуля pg при обновлении до последней работает.>.<обновление версии pg до последней>.
+Исправлена(ы) строка(и) <13> в файле <./package.json>
+
+Найденные ошибки логики приложения
+
+<не подключен bodyParser>.<правильно использован bodyParser для пробросса в body параметров>.Исправлена(ы) строка(и) <7,10,11>в файле <./app.js>
+
+<ошибка в переменной написанно passwordhash вместо passwordHash>.<переименовал passwordhash в passwordHash>.Исправлена(ы) строка(и) <12>в файле <./controllers/usercontroller.js>
+
+<не уверен ошибка или нет что секретная строка не вынесена>.<оставил как есть но в идеале надло вынести>. строка(и) <17,35>в файле <./controllers/usercontroller.js> 
+
+<если запрос делать то надо убирать из строки Bearer  jwt.verify(sessionToken>.<исправил на jwt.verify(sessionToken.split(' ')[1],>. строка(и) <13>в файле <./middleware/validate-session.js>
+
+<в .then получаем data а присваиваем  games>.<измененно с games на data>. Исправлена(ы) строка(и) <10> в файле <./controllers/gamecontroller.js>
+
+<ошибка в опциях в присвоении вместо req.user.id было req.user>. <исправленно с req.user на req.user.id>.Исправлена(ы) строка(и) <75>в файле <./controllers/gamecontroller.js>
+
+<неправильное обращение к user.id в Game.create>.<исправленно обращение с неправильного req.body.user.id на правильное req.user.id>.Исправлена(ы) строка(и) <45>в файле <./controllers/gamecontroller.js>
+
+<можно в body передавать айди любого юзера и оно создаст игру для любого юзера>.
+<исправленно обращение с неправильного req.body.user.id на правильное req.user.id>.
+Исправлена(ы) строка(и) <44> в файле <./controllers/gamecontroller.js>
+
+Рефактор кода:
+Проведен рефактор кода, var заменены на const, убраны лишние отступы, добавлены запятые и др.

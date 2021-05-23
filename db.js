@@ -3,8 +3,8 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize('gamedb', 'postgres', 'asd', {
     host: 'localhost',
     dialect: 'postgres',
-    port: "5433"
-})
+    port: "5433",
+});
 
 sequelize.authenticate().then(
     function success() {
@@ -14,11 +14,6 @@ sequelize.authenticate().then(
     function fail(err) {
         console.log(`Error: ${err}`);
     }
-)
-/*
-sequelize.sync({force: true}).then(result=>{
-    console.log(result);
-  })
-  .catch(err=> console.log(err));*/
+);
 
-  module.exports = sequelize
+module.exports = sequelize;
